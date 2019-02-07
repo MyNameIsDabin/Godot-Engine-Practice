@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://Mob.gd" type="Script" id=1]
+[ext_resource path="res://dodge_assets/art/enemyWalking_1.png" type="Texture" id=2]
+[ext_resource path="res://dodge_assets/art/enemyWalking_2.png" type="Texture" id=3]
+[ext_resource path="res://dodge_assets/art/enemyFlyingAlt_1.png" type="Texture" id=4]
+[ext_resource path="res://dodge_assets/art/enemyFlyingAlt_2.png" type="Texture" id=5]
+[ext_resource path="res://dodge_assets/art/enemySwimming_1.png" type="Texture" id=6]
+[ext_resource path="res://dodge_assets/art/enemySwimming_2.png" type="Texture" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 33.5753
+height = 10.6031
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "fly",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "swim",
+"speed": 4.0
+} ]
+
+[node name="Mob" type="RigidBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 3, -8.74228e-08 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 0
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+min_speed = 150
+max_speed = 250
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+transform/scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 2 )
+animation = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 3, -8.74228e-08 )
+transform/rot = 90.0
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Visibility" type="VisibilityNotifier2D" parent="."]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="exit_screen" from="Visibility" to="." method="_on_Visibility_exit_screen"]
+
+
