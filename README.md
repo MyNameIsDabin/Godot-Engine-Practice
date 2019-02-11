@@ -1,2 +1,4 @@
 # Waiting-for-Godot-Engine
-한국인이 고도(Godot Engine)를 사용하면 생기는 일
+
+Godot 공식문서에 있는 튜토리얼과 Youtube에 있는 고도 관련 영상들 따라 만들면서 작성한 것
+
